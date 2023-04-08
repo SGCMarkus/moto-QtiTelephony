@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" android:sharedUserId="android.uid.qtiphone" android:singleUser="true" coreApp="true" package="com.qti.phone" platformBuildVersionCode="33" platformBuildVersionName="13">
-    <permission android:name="com.qualcomm.qti.permission.USE_EXT_TELEPHONY_SERVICE" android:protectionLevel="signatureOrSystem"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
@@ -16,7 +15,7 @@
                 <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <service android:exported="true" android:name="com.qti.phone.ExtTelephonyService" android:permission="com.qualcomm.qti.permission.USE_EXT_TELEPHONY_SERVICE"/>
+        <service android:exported="true" android:name="com.qti.phone.ExtTelephonyService"/>
         <service android:exported="false" android:name="com.qti.phone.powerupoptimization.PowerUpOptimizationService"/>
         <service android:exported="false" android:name="com.qti.phone.primarycard.PrimaryCardService"/>
         <activity android:excludeFromRecents="true" android:label="@string/primary_card_selection_dialog_title" android:launchMode="singleTop" android:name="com.qti.phone.primarycard.PrimaryCardSelectionActivity"/>
