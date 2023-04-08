@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" android:sharedUserId="android.uid.qtiphone" android:singleUser="true" coreApp="true" package="com.qti.phone" platformBuildVersionCode="33" platformBuildVersionName="13">
+    <permission android:name="com.qualcomm.qti.permission.USE_EXT_TELEPHONY_SERVICE" android:protectionLevel="signatureOrSystem"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+    <uses-permission android:name="android.permission.STATUS_BAR"/>
+    <uses-permission android:name="com.qualcomm.permission.USE_QCRIL_MSG_TUNNEL"/>
+    <permission android:name="com.qti.phone.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.qti.phone.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:directBootAware="true" android:extractNativeLibs="true" android:name="com.qti.phone.QtiPhoneApp" android:persistent="true" android:usesNonSdkApi="true">
+        <receiver android:enabled="true" android:exported="false" android:label="BootReceiver" android:name="com.qti.phone.QtiTelephonyBootReceiver">
+            <intent-filter android:priority="1200">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="true" android:name="com.qti.phone.ExtTelephonyService" android:permission="com.qualcomm.qti.permission.USE_EXT_TELEPHONY_SERVICE"/>
+        <service android:exported="false" android:name="com.qti.phone.powerupoptimization.PowerUpOptimizationService"/>
+        <service android:exported="false" android:name="com.qti.phone.primarycard.PrimaryCardService"/>
+        <activity android:excludeFromRecents="true" android:label="@string/primary_card_selection_dialog_title" android:launchMode="singleTop" android:name="com.qti.phone.primarycard.PrimaryCardSelectionActivity"/>
+        <activity android:excludeFromRecents="true" android:label="@string/subsidysimcard_selection_dialog_title" android:launchMode="singleTop" android:name="com.qti.phone.subsidylock.SubsidyCardSelectionActivity"/>
+        <uses-library android:name="com.qti.extphone.extphonelib"/>
+        <uses-library android:name="com.qualcomm.qcrilhook"/>
+        <uses-library android:name="qti-telephony-utils" android:required="true"/>
+        <uses-library android:name="qti-telephony-hidl-wrapper" android:required="true"/>
+        <provider android:authorities="com.qti.phone.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+        </provider>
+    </application>
+</manifest>
